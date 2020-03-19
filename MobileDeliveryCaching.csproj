@@ -6,10 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\UMDGeneral\UMDGeneral.csproj" />
+    <PackageReference Include="UMDGeneral" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>

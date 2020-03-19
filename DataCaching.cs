@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using Windows.Storage;
+//using Windows.Storage;
 
 namespace DataCaching
 {
