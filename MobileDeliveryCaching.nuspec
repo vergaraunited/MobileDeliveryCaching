@@ -7,12 +7,17 @@
     <authors>$author$</authors>
     <owners>$author$</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <license type="expression">MIT</license>
-    <projectUrl>http://project_url_here_or_delete_this_line/</projectUrl>
-    <iconUrl>http://icon_url_here_or_delete_this_line/</iconUrl>
+    <projectUrl>https://github.com/vergaraunited/MobileDeliveryCaching</projectUrl>
+    <icon>images\icon.png</icon>
     <description>$description$</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <releaseNotes>Addind sqlite-net-pcl v1.6.292 Nuget Pkg Reference + icon to nuget package.</releaseNotes>
     <copyright>Copyright 2020</copyright>
     <tags>Tag1 Tag2</tags>
+    <dependencies>
+	    <dependency id="sqlite-net-pcl" version="1.6.292" />
+    </dependencies>
   </metadata>
+  <files>
+    <file src="..\UMDGeneral\images\icon.png" target="images\" />
+  </files>
 </package>
