@@ -12,9 +12,15 @@
     <AssemblyVersion>1.1.0.0</AssemblyVersion>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(Configuration)' == 'Release'">
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
-    <PackageReference Include="UMDGeneral" Version="1.0.0" />
+    <PackageReference Include="MobileDeliveryLogger" Version="1.1.1" />
+    <PackageReference Include="UMDGeneral" Version="1.2.2" />
   </ItemGroup>
-
+  
+  <ItemGroup Condition="'$(Configuration)' != 'Release'">
+    <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
+    <ProjectReference Include="../UMDGeneral\MobileDeliveryLogger\MobileDeliveryLogger.csproj" />
+    <ProjectReference Include="../UMDGeneral\UMDGeneral.csproj" />
+  </ItemGroup>
 </Project>
