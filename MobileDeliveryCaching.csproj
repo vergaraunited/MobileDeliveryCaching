@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -8,19 +8,18 @@
     <RepositoryType>Git</RepositoryType>
     <PackageIconUrl>https://unitedwindowmfg.com/wp-content/uploads/2017/02/New-Logo-4.png</PackageIconUrl>
     <PackageTags />
-    <Version>1.1.1</Version>
-    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <Version>1.3.0</Version>
+    <AssemblyVersion>1.3.0.0</AssemblyVersion>
+    <PackageReleaseNotes>Updating nuspec with dependency to MobileDeliveryGeneral.</PackageReleaseNotes>
+    <PackageLicenseUrl />
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(Configuration)' == 'Release'">
-    <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
-    <PackageReference Include="MobileDeliveryLogger" Version="1.1.1" />
-    <PackageReference Include="UMDGeneral" Version="1.2.2" />
+  <ItemGroup>
+    <None Remove="MobileDeliveryCaching.1.2.0.nupkg" />
   </ItemGroup>
-  
-  <ItemGroup Condition="'$(Configuration)' != 'Release'">
+
+  <ItemGroup>
+    <PackageReference Include="MobileDeliveryGeneral" Version="1.3.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
-    <ProjectReference Include="../UMDGeneral\MobileDeliveryLogger\MobileDeliveryLogger.csproj" />
-    <ProjectReference Include="../UMDGeneral\UMDGeneral.csproj" />
   </ItemGroup>
 </Project>
