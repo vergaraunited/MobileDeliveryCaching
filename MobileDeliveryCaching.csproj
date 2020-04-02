@@ -8,10 +8,11 @@
     <RepositoryType>Git</RepositoryType>
     <PackageIconUrl>https://unitedwindowmfg.com/wp-content/uploads/2017/02/New-Logo-4.png</PackageIconUrl>
     <PackageTags />
-    <Version>1.3.0</Version>
-    <AssemblyVersion>1.3.0.0</AssemblyVersion>
-    <PackageReleaseNotes>Updating nuspec with dependency to MobileDeliveryGeneral.</PackageReleaseNotes>
+    <Version>1.3.2</Version>
+    <AssemblyVersion>1.3.2.0</AssemblyVersion>
+    <PackageReleaseNotes>Automating nuget packaging somewhat</PackageReleaseNotes>
     <PackageLicenseUrl />
+    <FileVersion>1.3.2.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MobileDeliveryGeneral" Version="1.3.0" />
+    <PackageReference Include="MobileDeliveryGeneral" Version="1.3.1" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
   </ItemGroup>
 </Project>
