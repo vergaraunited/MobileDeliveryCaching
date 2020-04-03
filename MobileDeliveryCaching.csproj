@@ -8,16 +8,16 @@
     <RepositoryType>Git</RepositoryType>
     <PackageIconUrl>https://unitedwindowmfg.com/wp-content/uploads/2017/02/New-Logo-4.png</PackageIconUrl>
     <PackageTags />
-    <Version>1.4.0</Version>
-    <AssemblyVersion>1.4.0.0</AssemblyVersion>
-    <PackageReleaseNotes>Automating nuget packaging somewhat with Symbols</PackageReleaseNotes>
+    <Version>1.4.1</Version>
+    <AssemblyVersion>1.4.1.0</AssemblyVersion>
+    <PackageReleaseNotes>Automating nuget packaging somewhat with Symbols.  Foxed MobileDeliveryGeneral submodule.</PackageReleaseNotes>
     <PackageLicenseUrl />
-    <FileVersion>1.4.0.0</FileVersion>
+    <FileVersion>1.4.1.0</FileVersion>
     <IncludeSymbols>true</IncludeSymbols>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MobileDeliveryGeneral" Version="1.4.0" />
+    <PackageReference Include="MobileDeliveryGeneral" Version="1.4.1" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
   </ItemGroup>
 </Project>
