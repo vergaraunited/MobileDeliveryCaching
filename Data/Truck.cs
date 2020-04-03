@@ -1,6 +1,6 @@
 ﻿using SQLite;
 using System;
-using UMDGeneral.Data;
+using MobileDeliveryGeneral.Data;
 
 namespace DataCaching.Data
 {
@@ -36,7 +36,7 @@ namespace DataCaching.Data
         public TruckData TruckData() {
             return new TruckData()
             {
-                Command = UMDGeneral.Definitions.MsgTypes.eCommand.Trucks,
+                Command = MobileDeliveryGeneral.Definitions.MsgTypes.eCommand.Trucks,
                 Desc = Description,
                 DriverId = DriverId,
                 FirstName = FirstName,

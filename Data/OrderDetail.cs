@@ -1,5 +1,5 @@
 ﻿using SQLite;
-using UMDGeneral.Data;
+using MobileDeliveryGeneral.Data;
 
 namespace DataCaching.Data
 {
@@ -43,7 +43,7 @@ namespace DataCaching.Data
             {
                 //ManifestId = this.ManifestId,
                 //DSP_SEQ = this.DSP_SEQ,
-                Command = UMDGeneral.Definitions.MsgTypes.eCommand.Orders,
+                Command = MobileDeliveryGeneral.Definitions.MsgTypes.eCommand.Orders,
                 //CustomerId = this.CustomerId,
                 DLR_NO = this.DLR_NO,
                 ORD_NO = this.ORD_NO,

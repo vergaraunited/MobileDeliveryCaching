@@ -1,5 +1,5 @@
 ﻿using SQLite;
-using UMDGeneral.Data;
+using MobileDeliveryGeneral.Data;
 
 namespace DataCaching.Data
 {
@@ -48,7 +48,7 @@ namespace DataCaching.Data
         public StopData StopData()
         {
             return new StopData() { Address = this.Address, BillComplete = this.BillComplete,
-                Command = UMDGeneral.Definitions.MsgTypes.eCommand.Stops,
+                Command = MobileDeliveryGeneral.Definitions.MsgTypes.eCommand.Stops,
                 CustomerId = this.CustomerId, DealerName = this.DealerName, DealerNo = this.DealerNo,
                 Description = this.Description, DisplaySeq = this.DisplaySeq, ManifestId = this.ManifestId,
                 Notes = this.Notes, PhoneNumber = this.PhoneNumber,
