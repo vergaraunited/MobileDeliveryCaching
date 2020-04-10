@@ -31,6 +31,21 @@ namespace DataCaching.Data
 
         public Stop()
         { }
+        public Stop(Stop stop)
+        {
+            Id = stop.Id;
+            ManifestId = stop.ManifestId;
+            DisplaySeq = stop.DisplaySeq;
+            DealerNo = stop.DealerNo;
+            DealerName = stop.DealerName;
+            Address = stop.Address;
+            PhoneNumber = stop.PhoneNumber;
+            Description = stop.Description;
+            Notes = stop.Notes;
+            TRK_CDE = stop.TRK_CDE;
+            CustomerId = stop.CustomerId;
+            BillComplete = stop.BillComplete;
+        }
         public Stop(StopData sd)
         {
             ManifestId = sd.ManifestId;
