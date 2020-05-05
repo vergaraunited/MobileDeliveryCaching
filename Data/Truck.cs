@@ -4,7 +4,7 @@ using MobileDeliveryGeneral.Data;
 
 namespace DataCaching.Data
 {
-    public class Truck : isaCacheItem<Truck>
+    public class Truck : BaseData<Truck>, isaCacheItem<Truck>
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -50,7 +50,7 @@ namespace DataCaching.Data
             };
         }
 
-        public int CompareTo(Truck other)
+        public override int CompareTo(Truck other)
         {
             return this.Id.CompareTo(other.Id) + this.ManifestId.CompareTo(other.ManifestId) +
                 TruckCode.CompareTo(other.TruckCode) + ShipDate.CompareTo(other.ShipDate);

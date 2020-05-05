@@ -1,7 +1,9 @@
 ﻿using DataCaching.Data;
+using MobileDeliverySettings;
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace DataCaching.Caching
@@ -14,14 +16,33 @@ namespace DataCaching.Caching
 
         public CacheItem(string dbPath)
         {
-            this.dbpath = dbpath;
-            //_database = new SQLiteAsyncConnection(dbPath);
-            _database = new SQLiteConnection(dbPath);
-            //_database.CreateTableAsync<O>().Wait();
-            _database.CreateTable<O>();
+            try
+            {
+                this.dbpath = dbpath;
+                //_database = new SQLiteAsyncConnection(dbPath);
+                _database = new SQLiteConnection(dbPath);
+                //_database.CreateTableAsync<O>().Wait();
+                _database.CreateTable<O>();
+            }
+            catch (Exception ex) { }
+
         }
 
-        //public Task<List<O>> GetItemsAsync()
+        public void BackupAndClearAll()
+        {
+            _database.Backup($"{Settings.TruckCachePath}_bak_{ DateTime.Now.ToString("YYMMdd")}");
+            File.Delete(Settings.TruckCachePath);
+
+            _database.Backup($"{Settings.OrderCachePath}_bak_{DateTime.Now.ToString("YYMMdd")}");
+            File.Delete(Settings.OrderCachePath);
+
+            _database.Backup($"{Settings.StopCachePath}_bak_{DateTime.Now.ToString("YYMMdd")}");
+            File.Delete(Settings.StopCachePath);
+
+            _database.Backup($"{Settings.OrderDetailCachePath}_bak_{DateTime.Now.ToString("YYMMdd")}");
+            File.Delete(Settings.OrderDetailCachePath);
+        }
+
         public List<O> GetItems()
         {
             //return _database.Table<O>().ToListAsync();

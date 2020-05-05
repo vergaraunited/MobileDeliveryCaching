@@ -3,7 +3,7 @@ using MobileDeliveryGeneral.Data;
 
 namespace DataCaching.Data
 {
-    public class Order : isaCacheItem<Order>
+    public class Order : BaseData<Order>, isaCacheItem<Order>
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -17,10 +17,10 @@ namespace DataCaching.Data
         public long ORD_NO { get; set; }
         public string CLR { get; set; }
         public int MDL_CNT { get; set; }
-        public int MDL_NO { get; set; }
+        public string MDL_NO { get; set; }
         public int WIN_CNT { get; set; }
-        public string Status { get; set; }
-
+        public decimal WIDTH { get; set; }
+        public decimal HEIGHT{ get; set; }
         public Order() { }
 
         public Order(OrderData dt)
@@ -33,8 +33,10 @@ namespace DataCaching.Data
             this.CLR = dt.CLR;
             this.MDL_CNT = dt.MDL_CNT;
             this.MDL_NO = dt.MDL_NO;
+            this.HEIGHT = dt.HEIGHT;
+            this.WIDTH = dt.WIDTH;
             this.WIN_CNT = dt.WIN_CNT;
-            this.Status = dt.Status;
+            this.status = dt.status;
         }
 
         public OrderData OrderData()
@@ -51,14 +53,16 @@ namespace DataCaching.Data
                 MDL_CNT = this.MDL_CNT,
                 MDL_NO = this.MDL_NO,
                 WIN_CNT = this.WIN_CNT,
-                Status = this.Status
+                WIDTH = this.WIDTH,
+                HEIGHT = this.HEIGHT,
+                status = this.status
             };
         }
-        public int CompareTo(Order other)
+        public override int CompareTo(Order other)
         {
             return ManifestId.CompareTo(other.ManifestId) + DSP_SEQ.CompareTo(other.DSP_SEQ) + 
                 ORD_NO.CompareTo(other.ORD_NO) + MDL_CNT.CompareTo(other.MDL_CNT) + 
-                MDL_NO.CompareTo(other.MDL_NO);
+                MDL_NO.CompareTo(other.MDL_NO) + HEIGHT.CompareTo(other.HEIGHT) + WIDTH.CompareTo(other.WIDTH);
         }
     }
 }

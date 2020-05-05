@@ -1,13 +1,15 @@
 ﻿using SQLite;
 using MobileDeliveryGeneral.Data;
+using static MobileDeliveryGeneral.Definitions.MsgTypes;
 
 namespace DataCaching.Data
 {
-    public class Stop : isaCacheItem<Stop>
+    public class Stop : BaseData<Stop>, isaCacheItem<Stop>
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         [Indexed]
+        public override eCommand Command { get; set; } = eCommand.Stops;
         public long ManifestId { get; set; }
         public int DisplaySeq { get; set; }
         public long DealerNo { get; set; }
@@ -33,6 +35,7 @@ namespace DataCaching.Data
         { }
         public Stop(Stop stop)
         {
+            Command = stop.Command;
             Id = stop.Id;
             ManifestId = stop.ManifestId;
             DisplaySeq = stop.DisplaySeq;
@@ -48,6 +51,7 @@ namespace DataCaching.Data
         }
         public Stop(StopData sd)
         {
+            Command = sd.Command;
             ManifestId = sd.ManifestId;
             DisplaySeq = sd.DisplaySeq;
             DealerNo = sd.DealerNo;
@@ -69,7 +73,7 @@ namespace DataCaching.Data
                 Notes = this.Notes, PhoneNumber = this.PhoneNumber,
                 TruckCode = this.TRK_CDE };
         }
-        public int CompareTo(Stop other)
+        public override int CompareTo(Stop other)
         {
             return TRK_CDE.CompareTo(other.TRK_CDE) +
                 ManifestId.CompareTo(other.ManifestId) +
