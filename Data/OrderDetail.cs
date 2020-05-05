@@ -3,7 +3,7 @@ using MobileDeliveryGeneral.Data;
 
 namespace DataCaching.Data
 {
-    public class OrderDetail : isaCacheItem<OrderDetail>
+    public class OrderDetail : BaseData<OrderDetail>, isaCacheItem<OrderDetail>
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -16,9 +16,9 @@ namespace DataCaching.Data
         [Indexed]
         public long ORD_NO { get; set; }
         public string CLR { get; set; }
-        public int MDL_CNT { get; set; }
-        public int MDL_NO { get; set; }
-        public int WIN_CNT { get; set; }
+        public short MDL_CNT { get; set; }
+        public string MDL_NO { get; set; }
+        public short WIN_CNT { get; set; }
         public string Status { get; set; }
 
         public OrderDetail() { }
@@ -48,13 +48,13 @@ namespace DataCaching.Data
                 DLR_NO = this.DLR_NO,
                 ORD_NO = this.ORD_NO,
                 CLR = this.CLR,
-                MDL_CNT = (short)this.MDL_CNT,
-                MDL_NO = (short)this.MDL_NO,
-                WIN_CNT = (short)this.WIN_CNT,
+                MDL_CNT = this.MDL_CNT,
+                MDL_NO = this.MDL_NO,
+                WIN_CNT = this.WIN_CNT,
                 //Status = this.Status
             };
         }
-        public int CompareTo(OrderDetail other)
+        public override int CompareTo(OrderDetail other)
         {
             return ManifestId.CompareTo(other.ManifestId) + DSP_SEQ.CompareTo(other.DSP_SEQ) +
                 ORD_NO.CompareTo(other.ORD_NO) + MDL_CNT.CompareTo(other.MDL_CNT) +

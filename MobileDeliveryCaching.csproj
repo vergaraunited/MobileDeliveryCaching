@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Description>SQLite based  caching for the Manifest Loader and Driver's Truck, Stop, Order Manifest Details.</Description>
     <RepositoryUrl>https://github.com/vergaraunited/MobileDeliveryCaching</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
@@ -17,7 +17,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MobileDeliveryGeneral" Version="1.5.2" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MobileDeliveryGeneral\MobileDeliveryGeneral.csproj" />
+    <ProjectReference Include="..\MobileDeliverySettings\MobileDeliverySettings.csproj" />
   </ItemGroup>
 </Project>
