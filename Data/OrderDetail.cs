@@ -18,7 +18,8 @@ namespace DataCaching.Data
         public string CLR { get; set; }
         public short MDL_CNT { get; set; }
         public string MDL_NO { get; set; }
-        public short WIN_CNT { get; set; }
+        public string MODEL { get; set; }
+        public byte PAT_POS { get; set; }
         public string Status { get; set; }
 
         public OrderDetail() { }
@@ -33,7 +34,6 @@ namespace DataCaching.Data
             this.CLR = dt.CLR;
             this.MDL_CNT = dt.MDL_CNT;
             this.MDL_NO = dt.MDL_NO;
-            this.WIN_CNT = dt.WIN_CNT;
             //this.Status = dt.Status;
         }
 
@@ -43,14 +43,14 @@ namespace DataCaching.Data
             {
                 //ManifestId = this.ManifestId,
                 //DSP_SEQ = this.DSP_SEQ,
-                Command = MobileDeliveryGeneral.Definitions.MsgTypes.eCommand.Orders,
+                Command = MobileDeliveryGeneral.Definitions.MsgTypes.eCommand.OrdersLoad,
                 //CustomerId = this.CustomerId,
                 DLR_NO = this.DLR_NO,
                 ORD_NO = this.ORD_NO,
                 CLR = this.CLR,
                 MDL_CNT = this.MDL_CNT,
                 MDL_NO = this.MDL_NO,
-                WIN_CNT = this.WIN_CNT,
+                //BIN_NO = this.BIN_NO
                 //Status = this.Status
             };
         }
@@ -58,7 +58,8 @@ namespace DataCaching.Data
         {
             return ManifestId.CompareTo(other.ManifestId) + DSP_SEQ.CompareTo(other.DSP_SEQ) +
                 ORD_NO.CompareTo(other.ORD_NO) + MDL_CNT.CompareTo(other.MDL_CNT) +
-                MDL_NO.CompareTo(other.MDL_NO);
+                MDL_NO.CompareTo(other.MDL_NO);// + WIN_CNT.CompareTo(other.WIN_CNT) +
+                //BIN_NO.CompareTo(other.BIN_NO);
         }
     }
 }

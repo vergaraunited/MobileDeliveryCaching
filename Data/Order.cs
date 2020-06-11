@@ -26,16 +26,16 @@ namespace DataCaching.Data
         public Order(OrderData dt)
         {
             this.ManifestId = dt.ManifestId;
-            this.DSP_SEQ = dt.DSP_SEQ;
-            this.CustomerId = dt.CustomerId;
+            //this.DSP_SEQ = dt.DSP_SEQ;
+            //this.CustomerId = dt.CustomerId;
             this.DLR_NO = dt.DLR_NO;
             this.ORD_NO = dt.ORD_NO;
-            this.CLR = dt.CLR;
-            this.MDL_CNT = dt.MDL_CNT;
-            this.MDL_NO = dt.MDL_NO;
-            this.HEIGHT = dt.HEIGHT;
-            this.WIDTH = dt.WIDTH;
-            this.WIN_CNT = dt.WIN_CNT;
+            //this.CLR = dt.CLR;
+            //this.MDL_CNT = dt.MDL_CNT;
+            //this.MDL_NO = dt.MDL_NO;
+            //this.HEIGHT = dt.HEIGHT;
+            //this.WIDTH = dt.WIDTH;
+            //this.WIN_CNT = dt.WIN_CNT;
             this.status = dt.status;
         }
 
@@ -44,17 +44,17 @@ namespace DataCaching.Data
             return new OrderData()
             {
                 ManifestId = this.ManifestId,
-                DSP_SEQ = this.DSP_SEQ,
-                Command = MobileDeliveryGeneral.Definitions.MsgTypes.eCommand.Orders,
-                CustomerId = this.CustomerId,
-                DLR_NO = this.DLR_NO,
-                ORD_NO = this.ORD_NO,
-                CLR = this.CLR,
-                MDL_CNT = this.MDL_CNT,
-                MDL_NO = this.MDL_NO,
-                WIN_CNT = this.WIN_CNT,
-                WIDTH = this.WIDTH,
-                HEIGHT = this.HEIGHT,
+                //DSP_SEQ = this.DSP_SEQ,
+                Command = MobileDeliveryGeneral.Definitions.MsgTypes.eCommand.OrdersLoad,
+            //    CustomerId = this.CustomerId,
+                DLR_NO = (int)DLR_NO,
+                ORD_NO = (int)this.ORD_NO,
+                //CLR = this.CLR,
+                //MDL_CNT = this.MDL_CNT,
+                //MDL_NO = this.MDL_NO,
+                //WIN_CNT = this.WIN_CNT,
+                //WIDTH = this.WIDTH,
+                //HEIGHT = this.HEIGHT,
                 status = this.status
             };
         }

@@ -28,7 +28,7 @@ namespace DataCaching.Data
             FirstName = td.FirstName;
             LastName = td.LastName;
             TruckCode = td.TRK_CDE;
-            ShipDate = td.SHIP_DTE.Date.ToString("yyyy-MM-dd");
+            ShipDate = td.SHIP_DTE.ToString();
             Description = td.Desc;
             Notes = td.NOTES;
             IsClosed = td.IsClosed;
@@ -44,7 +44,7 @@ namespace DataCaching.Data
                 IsClosed = IsClosed,
                 ManifestId = ManifestId,
                 NOTES = Notes,
-                SHIP_DTE = DateTime.Parse(ShipDate),
+                SHIP_DTE = Int64.Parse(ShipDate),
                 TRK_CDE = TruckCode,
                 Id = Id
             };
