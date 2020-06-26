@@ -1,4 +1,6 @@
-﻿using DataCaching.Data;
+﻿using MobileDeliveryGeneral.Data;
+using MobileDeliveryGeneral.DataManager.Interfaces;
+using MobileDeliveryLogger;
 using MobileDeliverySettings;
 using SQLite;
 using System;
@@ -18,7 +20,7 @@ namespace DataCaching.Caching
         {
             try
             {
-                this.dbpath = dbpath;
+                this.dbpath = dbPath;
                 //_database = new SQLiteAsyncConnection(dbPath);
                 _database = new SQLiteConnection(dbPath);
                 //_database.CreateTableAsync<O>().Wait();
@@ -30,17 +32,17 @@ namespace DataCaching.Caching
 
         public void BackupAndClearAll()
         {
-            _database.Backup($"{Settings.TruckCachePath}_bak_{ DateTime.Now.ToString("YYMMdd")}");
-            File.Delete(Settings.TruckCachePath);
+            _database.Backup($"{SettingsAPI.TruckCachePath}_bak_{ DateTime.Now.ToString("YYMMdd")}");
+            File.Delete(SettingsAPI.TruckCachePath);
 
-            _database.Backup($"{Settings.OrderCachePath}_bak_{DateTime.Now.ToString("YYMMdd")}");
-            File.Delete(Settings.OrderCachePath);
+            _database.Backup($"{SettingsAPI.OrderCachePath}_bak_{DateTime.Now.ToString("YYMMdd")}");
+            File.Delete(SettingsAPI.OrderCachePath);
 
-            _database.Backup($"{Settings.StopCachePath}_bak_{DateTime.Now.ToString("YYMMdd")}");
-            File.Delete(Settings.StopCachePath);
+            _database.Backup($"{SettingsAPI.StopCachePath}_bak_{DateTime.Now.ToString("YYMMdd")}");
+            File.Delete(SettingsAPI.StopCachePath);
 
-            _database.Backup($"{Settings.OrderDetailCachePath}_bak_{DateTime.Now.ToString("YYMMdd")}");
-            File.Delete(Settings.OrderDetailCachePath);
+            _database.Backup($"{SettingsAPI.OrderDetailCachePath}_bak_{DateTime.Now.ToString("YYMMdd")}");
+            File.Delete(SettingsAPI.OrderDetailCachePath);
         }
 
         public List<O> GetItems()
@@ -54,22 +56,28 @@ namespace DataCaching.Caching
             try
             {
                 string sql = "";
-                if (typeof(O).Name == "Stop")
+                if (typeof(O).Name == "StopData")
                 {
-                    Stop st = (Stop)(isaCacheItem<O>)it;
+                    StopData st = (StopData)(isaCacheItem<O>)it;
                     sql = "select * from " + typeof(O).Name + " where ManifestId=" + st.ManifestId;
                 }
-                else if (typeof(O).Name == "Truck")
+                else if (typeof(O).Name == "TruckData")
                 {
-                    Truck tr = (Truck)(isaCacheItem<O>)it;
+                    TruckData tr = (TruckData)(isaCacheItem<O>)it;
                     sql = "select * from " + typeof(O).Name + " where " +
-                        " ShipDate='" + tr.ShipDate + "'";
+                        " ShipDate='" + tr.SHIP_DTE + "'";
                 }
-                else if (typeof(O).Name == "Order")
+                else if (typeof(O).Name == "OrderMasterData")
                 {
-                    Order od = (Order)(isaCacheItem<O>)it;
+                    OrderMasterData od = (OrderMasterData)(isaCacheItem<O>)it;
                     sql = "select * from \"" + typeof(O).Name + "\" where " +
-                        " ManifestId=" + od.ManifestId + " AND DSP_SEQ=" + od.DSP_SEQ.ToString();
+                        " ManifestId=" + od.ManId + " AND ORD_NO=" + od.ORD_NO.ToString();
+                }
+                else if (typeof(O).Name == "OrderOptionsData")
+                {
+                    OrderOptionsData od = (OrderOptionsData)(isaCacheItem<O>)it;
+                    sql = "select * from \"" + typeof(O).Name + "\" where " +
+                        " ORD_NO=" + od.ORD_NO + " AND OPT_NUM =" + od.OPT_NUM.ToString() + " AND MDL_NO= " + od.MDL_NO;
                 }
                 if (sql.Length > 0)
                 {
@@ -91,38 +99,89 @@ namespace DataCaching.Caching
             try
             {
                 string sql="";
-                if (typeof(O).Name == "Stop")
+                if (typeof(O).Name == "StopData")
                 {
-                    Stop st = (Stop)(isaCacheItem<O>)it;
-                    sql = "select * from " + typeof(O).Name + " where ManifestId=" + st.ManifestId;
-                    if (st.DisplaySeq !=0)
-                        sql += " AND DisplaySeq=" + st.DisplaySeq;
+                    if (!FileExists(SettingsAPI.StopCachePath))
+                        sql = "";
+                    else
+                    {
+
+                        StopData st = (StopData)(isaCacheItem<O>)it;
+                        sql = "select * from " + typeof(O).Name + " where ManifestId=" + st.ManifestId;
+                        if (st.DisplaySeq != 0)
+                            sql += " AND DisplaySeq=" + st.DisplaySeq;
+                    }
                 }
-                else if (typeof(O).Name == "Truck")
+                else if (typeof(O).Name == "TruckData")
                 {
-                    Truck tr = (Truck)(isaCacheItem<O>)it;
-                    sql = "select * from " + typeof(O).Name + " where " +
-                        " ManifestId=" + tr.ManifestId;
+                    if (!FileExists(SettingsAPI.StopCachePath))
+                        sql = "";
+                    else
+                    {
+                        TruckData tr = (TruckData)(isaCacheItem<O>)it;
+                        sql = "select * from " + typeof(O).Name + " where " +
+                            " ManifestId=" + tr.ManifestId;
+                    }
                 }
-                else if (typeof(O).Name == "Order")
+                else if (typeof(O).Name == "OrderMasterData")
                 {
-                    Order od = (Order)(isaCacheItem<O>)it;
-                    sql = "select * from " + typeof(O).Name + " where " +
-                        " DSP_SEQ=" + od.DSP_SEQ + " AND ORD_NO=" + od.ORD_NO + " AND MDL_NO=" + od.MDL_NO;
+                    if (!FileExists(SettingsAPI.StopCachePath))
+                        sql = "";
+                    else
+                    {
+                        OrderMasterData od = (OrderMasterData)(isaCacheItem<O>)it;
+                        sql = "select * from " + typeof(O).Name + " where " +
+                            " ORD_NO=" + od.ORD_NO;
+                    }
+                }
+                else if (typeof(O).Name == "OrderOptionsData")
+                {
+                    if (!FileExists(SettingsAPI.StopCachePath))
+                        sql = "";
+                    else
+                    {
+
+                        OrderOptionsData od = (OrderOptionsData)(isaCacheItem<O>)it;
+                        sql = "select * from " + typeof(O).Name + " where " +
+                            " ORD_NO=" + od.ORD_NO + " AND OPT_NUM=" + od.OPT_NUM + " AND MDL_NO=" + od.MDL_NO;
+                    }
                 }
                 if (sql.Length > 0)
                 {
-                    List<O> outObj = _database.Query<O>(sql);
+                    if (!FileExists(SettingsAPI.StopCachePath))
+                        sql = "";
+                    else
+                    {
+                        List<O> outObj = _database.Query<O>(sql);
 
-                    if (outObj.Count >0)
-                        return outObj[0];
+                        if (outObj.Count > 0)
+                            return outObj[0];
+                    }
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception ex) { Logger.Debug($"SQLITE Error: {ex.Message}."); }
 
             return default(O);
         }
-        
+        private bool FileExists(string fileName)
+        {
+            var result = false;
+            try
+            {
+                if (File.Exists(fileName))
+                {
+                    String sql = "SELECT name FROM sqlite_master WHERE type = 'table' AND name = '{table_name}'";
+                    var nm = _database.Query<O>(sql);
+                    if (nm == null || nm.Count==0)
+                        return false;
+                    else
+                        return true;
+                }
+            }
+            catch { }
+            return result;
+        }
+
         public int SaveItem(O it)
         {
             if (it.Id != 0)

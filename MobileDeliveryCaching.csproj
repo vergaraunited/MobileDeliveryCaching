@@ -17,11 +17,26 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
+    <Compile Remove="Caching\CacheOrders.cs" />
+    <Compile Remove="Caching\CacheStops.cs" />
+    <Compile Remove="Caching\CacheTrucks.cs" />
+    <Compile Remove="Data\Order.cs" />
+    <Compile Remove="Data\OrderDetail.cs" />
+    <Compile Remove="Data\OrderOption.cs" />
+    <Compile Remove="Data\Stop.cs" />
+    <Compile Remove="Data\Truck.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MobileDeliveryGeneral\MobileDeliveryGeneral.csproj" />
     <ProjectReference Include="..\MobileDeliverySettings\MobileDeliverySettings.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
 </Project>

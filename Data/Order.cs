@@ -58,6 +58,25 @@ namespace DataCaching.Data
                 status = this.status
             };
         }
+        public OrderMasterData OrderMasterData()
+        {
+            return new OrderMasterData()
+            {
+                ManId = this.ManifestId,
+                //DSP_SEQ = this.DSP_SEQ,
+                Command = MobileDeliveryGeneral.Definitions.MsgTypes.eCommand.OrdersLoad,
+                //    CustomerId = this.CustomerId,
+                DLR_NO = (int)DLR_NO,
+                ORD_NO = (int)this.ORD_NO,
+                //CLR = this.CLR,
+                //MDL_CNT = this.MDL_CNT,
+                //MDL_NO = this.MDL_NO,
+                //WIN_CNT = this.WIN_CNT,
+                //WIDTH = this.WIDTH,
+                //HEIGHT = this.HEIGHT,
+                status = this.status
+            };
+        }
         public override int CompareTo(Order other)
         {
             return ManifestId.CompareTo(other.ManifestId) + DSP_SEQ.CompareTo(other.DSP_SEQ) + 
